@@ -1,0 +1,59 @@
+from PIL import ImageGrab
+import os
+
+# ------ 填写这部分 ---------
+# 截取的模板，尽量不要截取太大，建议只截取有固定特征的部分，可以提高识别成功率和运行效率
+# 提供图片A、B、C的大概坐标(左上角 x, 左上角y, 截取的宽 w, 截取的高 h)
+region_a = (50, 115, 277, 171)  # 假设 模板 图片A的区域
+region_b = (50, 115, 277, 171)  # 假设 模板 图片B的区域
+region_c = (50, 115, 250, 171)  # 假设 模板 图片C的区域
+# ---------------
+
+# 获取当前脚本所在目录作为 root_path
+root_path = os.path.dirname(os.path.abspath(__file__))
+
+
+# 模板图片路径和对应区域坐标的映射
+def get_image_regions():
+    return {
+        'image_a': {
+            'path': os.path.join(root_path, 'img', '1_red_envelope_popup.png'),
+            'region': region_a
+        },
+        'image_b': {
+            'path': os.path.join(root_path, 'img', '2_click_red_envelope.png'),
+            'region': region_b
+        },
+        'image_c': {
+            'path': os.path.join(root_path, 'img',
+                                 '3_red_envelope_result.png'),
+            'region': region_c
+        }
+    }
+
+
+image_regions = get_image_regions()
+
+
+# 主要逻辑循环
+def screenshot():
+    print("▶ 开始截图 ...")
+
+    # 循环截图和保存
+    for value in image_regions.values():
+        region = value['region']
+        path = value['path']
+        screen = ImageGrab.grab(bbox=(region[0], region[1],
+                                      region[0] + region[2],
+                                      region[1] + region[3]))
+
+        # 输出截图到本地文件
+        screen.save(path)
+        print(f"✅ 截图成功: {path}")
+
+    print("⏹ 截图结束 ...")
+
+
+# 启动脚本
+if __name__ == '__main__':
+    screenshot()
