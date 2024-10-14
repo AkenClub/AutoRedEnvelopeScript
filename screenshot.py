@@ -14,6 +14,7 @@ region_c3 = (330, 740, 290, 60)  # 假设 模板 图片C的区域
 region_c4 = (330, 635, 290, 60)  # 假设 模板 图片C的区域
 region_c5 = (360, 635, 270, 60)  # 假设 模板 图片C的区域
 region_c6 = (360, 635, 270, 60)  # 假设 模板 图片C的区域
+region_c7 = (360, 635, 270, 60)  # 假设 模板 图片C的区域
 # ---------------
 
 # 获取当前脚本所在目录作为 root_path
@@ -56,10 +57,15 @@ def get_image_regions():
         #                          '3_red_envelope_result_5.png'),
         #     'region': region_c5
         # },
-        'image_c6': {
+        # 'image_c6': {
+        #     'path': os.path.join(root_path, 'img',
+        #                          '3_red_envelope_result_6.png'),
+        #     'region': region_c6
+        # },
+        'image_c7': {
             'path': os.path.join(root_path, 'img',
-                                 '3_red_envelope_result_6.png'),
-            'region': region_c6
+                                 '3_red_envelope_result_7.png'),
+            'region': region_c7
         }
     }
 

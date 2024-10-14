@@ -20,6 +20,7 @@ region_c3 = (330, 740, 290, 60)  # 假设 模板 图片C的区域
 region_c4 = (330, 635, 290, 60)  # 假设 模板 图片C的区域
 region_c5 = (360, 635, 270, 60)  # 假设 模板 图片C的区域
 region_c6 = (360, 635, 270, 60)  # 假设 模板 图片C的区域
+region_c7 = (360, 635, 270, 60)  # 假设 模板 图片C的区域
 
 # ---------------
 
@@ -52,6 +53,8 @@ image_c5_path = os.path.join(root_path, 'img',
                              '3_red_envelope_result_5.png')  # 抢红包结果弹窗
 image_c6_path = os.path.join(root_path, 'img',
                              '3_red_envelope_result_6.png')  # 抢红包结果弹窗
+image_c7_path = os.path.join(root_path, 'img',
+                             '3_red_envelope_result_7.png')  # 抢红包结果弹窗
 
 
 # 模拟点击函数，点击可点击区域的随机位置
@@ -102,7 +105,7 @@ def print_log(content, limit_disable=False):
     global log_num
     log_num += 1
 
-    if log_num % 10 == 0:
+    if log_num % 20 == 0:
         print(content)
 
     if log_num > 10000:
@@ -133,19 +136,24 @@ def process_screen_click(image_path, region, screenshot_prefix):
     return False
 
 
+def print_success_info():
+    global success_num
+
+    success_num += 1
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"🎉 抢到红包 +1，总共抢红包 {success_num} 次！-- {current_time}")
+
+
 # 检测 结果 弹窗，包括 再来一次、开心收下 等等
 def check_result_dialog(log_flag=False):
-    global success_num
 
     if log_flag:
         print_log("阶段 C....", True)
 
     # 使用通用函数依次处理不同的弹窗情况
     if process_screen_click(image_c_path, region_c, 'screen_c'):
-        success_num += 1
-        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        print(f"🎉 抢到红包 +1，总共抢红包 {success_num} 次！-- {current_time}")
-        print("👉 关闭抢红包结果 C 成功，等待下一次红包...")
+        print_success_info()
+        print("👉 关闭抢红包结果 C,（开心收下），等待下一次红包...")
         return True
 
     if process_screen_click(image_c2_path, region_c2, 'screen_c2'):
@@ -166,6 +174,11 @@ def check_result_dialog(log_flag=False):
 
     if process_screen_click(image_c6_path, region_c6, 'screen_c6'):
         print("👉 关闭抢红包结果 C6，（我知道了）等待下一次红包...")
+        return True
+
+    if process_screen_click(image_c7_path, region_c7, 'screen_c7'):
+        print_success_info()
+        print("👉 关闭抢红包结果 C7，（开心收下），等待下一次红包...")
         return True
 
     return False
