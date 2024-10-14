@@ -19,6 +19,7 @@ region_c2 = (330, 740, 290, 60)  # 假设 实时截图 C 的区域
 region_c3 = (330, 740, 290, 60)  # 假设 模板 图片C的区域
 region_c4 = (330, 635, 290, 60)  # 假设 模板 图片C的区域
 region_c5 = (360, 635, 270, 60)  # 假设 模板 图片C的区域
+region_c6 = (360, 635, 270, 60)  # 假设 模板 图片C的区域
 
 # ---------------
 
@@ -49,6 +50,8 @@ image_c4_path = os.path.join(root_path, 'img',
                              '3_red_envelope_result_4.png')  # 抢红包结果弹窗
 image_c5_path = os.path.join(root_path, 'img',
                              '3_red_envelope_result_5.png')  # 抢红包结果弹窗
+image_c6_path = os.path.join(root_path, 'img',
+                             '3_red_envelope_result_6.png')  # 抢红包结果弹窗
 
 
 # 模拟点击函数，点击可点击区域的随机位置
@@ -159,6 +162,10 @@ def check_result_dialog(log_flag=False):
 
     if process_screen_click(image_c5_path, region_c5, 'screen_c5'):
         print("👉 关闭抢红包结果 C5，（再来一次）等待下一次红包...")
+        return True
+
+    if process_screen_click(image_c6_path, region_c6, 'screen_c6'):
+        print("👉 关闭抢红包结果 C6，（我知道了）等待下一次红包...")
         return True
 
     return False
