@@ -105,7 +105,7 @@ def print_log(content, limit_disable=False):
     global log_num
     log_num += 1
 
-    if log_num % 20 == 0:
+    if log_num % 60 == 0:
         print(content)
 
     if log_num > 10000:
@@ -211,12 +211,14 @@ def red_envelope_bot():
                         break
 
         else:
-            # 检查是不是有结果弹窗，避免有时候一些直播间红包弹窗逻辑没有处理好
-            # 这里主要检测有漏处理的结果弹窗
-            result = check_result_dialog()
-            if result:
-                # 有结果后等待弹窗关闭动画，避免再次检测
-                time.sleep(0.3)
+            # 这里检测 C 只是做一层保险，不用每一次都检查是否有结果弹窗，可以加快检测和点击 A 的效率
+            if log_num % 30 == 0:
+                # 检查是不是有结果弹窗，避免有时候一些直播间红包弹窗逻辑没有处理好
+                # 这里主要检测有漏处理的结果弹窗
+                result = check_result_dialog()
+                if result:
+                    # 有结果后等待弹窗关闭动画，避免再次检测
+                    time.sleep(0.3)
 
         # 需不需要睡眠延迟自定
         # time.sleep(0.1)
